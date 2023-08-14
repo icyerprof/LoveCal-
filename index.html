@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width">
+	<title>Rockson</title>
+	<style type="text/css" media="all">
+	  *{
+		margin:0;
+		padding:0;
+		brder:1px solid #000;
+	  }
+	  body{
+		display:;
+		justify-content:center;
+		align-items:center;
+		min-height:100vh;
+		  background-image:url("https://suhail-muhammed.000webhostapp.com/love.jpg");
+	background-size:cover;
+	  }
+	  #box{
+		text-align:center;
+		width:100%;
+		height:100vh;
+		background-color:rgb(250,0,0,0.3);
+	  }
+	#f{
+	height:60vh;
+	}
+	#s{
+	height:20vh;
+	}
+	#meter{
+	  border:1px solid rgb(250,250,250,0.4);
+	  margin:0px;
+	  position:relative;
+	  width:80%;
+	  height:80%;
+	  order:1px solid #fff;
+	  border-top-right-radius:50%;
+	  border-bottom-left-radius:50%;
+	  overflow:hidden;
+	  background-color:rgb(0,0,0,0.5);
+	}
+	#value{
+	  position:absolute;
+	  bottom:0;
+	  width:100%;
+	  background:linear-gradient(#e041d4,#dc3636);
+	  border-top-left-radius:5px;
+	  border-top-right-radius:5px;
+	}
+	@keyframes meter{
+	  0%{ box-shadow:0px 0px 0px #fff;}
+	  100%{ box-shadow:0px 0px 20px #fff;}
+	}
+	#names{
+	  width:80%;
+	  border-top-right-radius:50%;
+	  border-bottom-left-radius:50%;
+	  margin-left:10px;
+	  background-color:rgb(0,0,0,0.5);
+	}
+	.names,#percentageMain{
+	  text-transform:uppercase;
+	  font-family:;
+	  color:#fff;
+	  font-size:20px;
+	  letter-spacing:3px;
+	  padding:5px;
+	  margin-top:10px;
+	  font-weight:900;
+	}
+	.f{
+	  text-align:left;
+	  margin-left:10%;
+	}
+	.s{
+	  margin-right:10%;
+	}
+	#percentageMain{
+	  text-align:center;
+	  font-size:40px;
+	}
+  #q{
+	margin:10px 0px 0px 10px;
+	background-color:rgb(0,0,0,0.5);
+	border-radius:20px;
+	text-align:left;
+	width:80%;
+	overflow:scroll;
+	padding:10px;
+	color:#fff;
+	font-weight:500;
+	letter-spacing:2px;
+  }
+  #name1,#name2{
+  text-transform:uppercase;
+	outline:none;
+	font-weight:900;
+	letter-spacing:3px;
+	text-align:center;
+	border:0px;
+	border-bottom:1px solid #fff;
+	background-color:transparent;
+	padding:5px;
+	color:#fff;
+	font-size:20px;
+	width:90%;
+	margin-bottom:20px;
+	height:30px;
+	}
+  button{
+	outline:none;
+	font-weight:900;
+	color:#fff;
+	background-color:rgb(195,27,68);
+	border-radius:10px;
+	border:5px solid rgb(0,0,0,0.5);
+	font-size:20px;
+	padding:10px;
+	margin:5px;
+	width:80%;
+	height:50%;
+  }
+  #percentage{
+	color:#fff;
+	font-size:10px;
+  }
+	  </style>
+  </head>
+  <body>
+	<table id="box" border="0">
+	  <tr id="f">
+		<td>
+		  <div id="names">
+			<p class="names f" ></p>
+			<p class="names s" ></p>
+			<p id="percentageMain"></p>
+		  </div>
+		  <div id="q">
+		   
+		  </div>
+		</td>
+		<td>
+		  <div id="meter"><div id="value">
+			<p id="percentage"></p>
+		  </div> </div>
+		  
+		</td>
+	  </tr>
+	  <tr id="s">
+		<td>
+		  <input type="text" name="name1" id="name1" value="" placeholder="ENTER YOUR NAME"/>
+		  <input type="text" name="name2" id="name2" value="" placeholder=" YOUR LOvE NAME" />
+		</td>
+		<td>
+		  <button onclick="start()">GO</button>
+		</td>
+	  </tr>
+	</table>
+<script type="text/javascript" charset="utf-8">
+const Name1=document.querySelector("#name1");
+const Name2=document.querySelector("#name2");
+const Meter=document.querySelector("#value");
+const Percentage=document.querySelector("#percentage");
+const Percentaged=document.querySelector("#percentageMain");
+const dName1=document.querySelector(".f");
+const q=document.querySelector("#q");
+const dName2=document.querySelector(".s");
+const namebox=document.querySelector("#names");
+const meterBody=document.querySelector("#meter");
+
+let w,percentage,dw;
+quote=["Stay single stay motivated 😎","The best and most beautiful things in this world cannot be seen or even heard, but must be felt with the heart.","Life without love is like a tree without blossoms or fruit.","The best thing to hold onto in life is each other.","Tis better to have loved and lost than never to have loved at all.","You know you're in love when you can't fall asleep because reality is finally better than your dreams.","The giving of love is an education in itself.","Being deeply loved by someone gives you strength, while loving someone deeply gives you courage."];
+let self=false;
+function ran(min,max){
+  return Math.floor(Math.random()*(max-min+1))-min;
+}
+
+function start(){
+q.style.animation=namebox.style.animation="";
+self=false;
+name1=Name1.value.toUpperCase();
+name2=Name2.value.toUpperCase();
+if(name1==''||name1==' '){
+  q.innerHTML="PLEASE ENTER YOUR NAME";
+  return;
+}
+if(name2==''||name2==' '){
+  q.innerHTML="ARE YOU SINGLE!?";
+  return
+}
+if(name1===name2){self=true;}
+addName=[];
+value=[];
+for(let w of name1){
+  addName.push(w);
+}
+for(let w of name2){
+  if(w==" "){continue}
+  addName.push(w);
+}
+addName.sort();
+for(let i of addName){
+  let count=0;
+  for(let j of addName){
+	if(i==j){
+	  if(count>addName.length/4){
+		count=-2;
+	  }
+	  count+=40/addName.length;
+	}else
+	count-=addName.length/10;
+  }
+value.push(count);
+
+}
+while(value.length>1){
+for(i=0;i<value.length/2;i++){
+  value[i]=value[i]+value[value.length-1-i];
+  value.pop();
+}}
+value[0]-=addName.length/10;
+value[0]=Math.abs(value[0]);
+if(value[0]>45){
+  while(value[0]>45){
+	value[0]=value[0]-45;
+  }
+}
+value[0]=Math.round(value[0]*10)/10;
+percentage=55+Math.abs(value[0]);
+if(self){percentage=100}
+w=0;
+dw=1;
+
+dName1.innerHTML=Name1.value;
+dName2.innerHTML=Name2.value;
+meterBody.style.animation="meter 1s linear infinite alternate";
+meter();
+}
+function meter(){
+  
+  if(w>=percentage||isNaN(percentage)){
+	updete();
+	return}
+  Meter.style.height=w+"%";
+  w+=dw;
+  Percentage.innerHTML=w+"%";
+  Percentaged.innerHTML=w+"%";
+  requestAnimationFrame(meter)
+}
+function updete(){
+   Meter.style.height=w+"%";
+  Percentage.innerHTML=percentage+"%";
+  Percentaged.innerHTML=percentage+"%";
+  q.innerHTML=quote[ran(0,quote.length-1)];
+ 
+if(self){
+	q.innerHTML="LOVING YOURSELF IS EVERYTHING";
+} q.style.animation=namebox.style.animation="meter 1s linear infinite alternate";
+  meterBody.style.animation="";;
+  
+}
+alert("made with witchcraft 🧟‍♀️🧟🧟‍♂️ Everything is real based on spirituality... @iCyberTech");
+</script>
+  </body>
+</html>
